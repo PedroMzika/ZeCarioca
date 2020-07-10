@@ -1,0 +1,31 @@
+{
+  "name": "lexuro-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "@lavacord/discord.js": "0.0.6",
+    "discord.js": "^12.2.0",
+    "dotenv": "^8.2.0",
+    "erela.js": "^1.1.7",
+    "firebase": "^7.14.3",
+    "fs": "0.0.1-security",
+    "gorilink": "^1.0.8",
+    "lavacord": "^1.1.7",
+    "moment": "^2.25.3",
+    "moment-duration-format": "^2.3.2",
+    "node-fetch": "^2.6.0",
+    "util": "^0.12.3",
+    "ws": "^7.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  },
+  "scripts": {
+    "start": "nodemon",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

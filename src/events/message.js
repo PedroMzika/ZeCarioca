@@ -1,0 +1,39 @@
+const { findPrefix } = require('../utils/Util');
+const { LexuroEmbed } = require('../utils');
+const CommandContext = require('../structures/command/CommandContext');
+
+module.exports = class Message {
+  constructor(client) {
+    this.client = client;
+  }
+
+  event(message) {
+    if (message.author.bot && !message.guild) return;
+
+    const thisPrefix = findPrefix(this.client, message);
+
+    if (thisPrefix && message.content.length > thisPrefix.length) {
+      const fullCmd = message.content
+        .substring(thisPrefix.length)
+        .split(/[ \t]+/)
+        .filter((a) => a);
+      const args = fullCmd.slice(1);
+      if (!fullCmd.length) return;
+
+      const cmd = fullCmd[0].toLowerCase().trim();
+      const command = this.client.commands.find(
+        (c) => c.name === cmd || (c.aliases && c.aliases.includes(cmd))
+      );
+
+      if (command) {
+        const context = new CommandContext({
+          client: this.client,
+          message,
+          command,
+        });
+
+        command._run(context, args);
+      }
+    }
+  }
+};
