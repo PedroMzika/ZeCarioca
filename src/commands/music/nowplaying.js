@@ -1,4 +1,4 @@
-const { Command, LexuroEmbed } = require('../../');
+const { Command, ParrotEmbed } = require('../../');
 const { Utils } = require("erela.js");
 
 module.exports = class NpCommand extends Command {
@@ -15,7 +15,7 @@ module.exports = class NpCommand extends Command {
   async run({ message, author, client, channel }) {
     const player = this.client.music.players.get(message.guild.id);
 
-    const NpEmbed = new LexuroEmbed()
+    const NpEmbed = new ParrotEmbed()
       .setAuthor("Tocando Agora!")
       .addField(`Título:`, player.queue[0].info.title, false)
       .addField(`Autor:`, player.queue[0].info.author,false)

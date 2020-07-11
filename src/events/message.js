@@ -1,5 +1,5 @@
 const { findPrefix } = require('../utils/Util');
-const { LexuroEmbed } = require('../utils');
+const { ParrotEmbed } = require('../utils');
 const CommandContext = require('../structures/command/CommandContext');
 
 module.exports = class Message {

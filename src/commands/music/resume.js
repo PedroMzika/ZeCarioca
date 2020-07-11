@@ -1,4 +1,4 @@
-const { Command, LexuroEmbed } = require('../../');
+const { Command, ParrotEmbed } = require('../../');
 
 module.exports = class ResumeCommand extends Command {
   constructor(client) {
@@ -15,10 +15,10 @@ module.exports = class ResumeCommand extends Command {
     const player = this.client.music.players.get(message.guild.id);
 
     if (player.paused) {
-      message.channel.send(new LexuroEmbed() .setDescription("<:musicPlay:708136949755674654> | A música foi retomada."));
+      message.channel.send(new ParrotEmbed() .setDescription("<:musicPlay:708136949755674654> | A música foi retomada."));
     	player.pause(false);
     } else {
-       message.channel.send(new LexuroEmbed() .setDescription("⚠️ | Á música não está pausada."));
+       message.channel.send(new ParrotEmbed() .setDescription("⚠️ | Á música não está pausada."));
     };
   };
 }

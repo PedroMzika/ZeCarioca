@@ -1,4 +1,4 @@
-const { Command, LexuroEmbed } = require('../../');
+const { Command, ParrotEmbed } = require('../../');
 const { Utils } = require("erela.js");
 
 module.exports = class VolumeCommand extends Command {
@@ -17,14 +17,14 @@ module.exports = class VolumeCommand extends Command {
     const volume = args[0];
 
     if (!volume) {
-      message.channel.send(new LexuroEmbed() .setDescription(`<:musicSettings:708136949487239198> | O volume atual está em: ${player.state.volume}%`))
+      message.channel.send(new ParrotEmbed() .setDescription(`<:musicSettings:708136949487239198> | O volume atual está em: ${player.state.volume}%`))
     } else if (isNaN(volume)) {
-      message.channel.send(new LexuroEmbed() .setDescription(`⚠️ | Digite um \`número\` para definir.`));
+      message.channel.send(new ParrotEmbed() .setDescription(`⚠️ | Digite um \`número\` para definir.`));
     } else if (volume > 250) {
-      message.channel.send(new LexuroEmbed() .setDescription(`⚠️ | Digite um \`número\` para **menor** que 250 para definir.`));
+      message.channel.send(new ParrotEmbed() .setDescription(`⚠️ | Digite um \`número\` para **menor** que 250 para definir.`));
     } else {
       player.volume(volume);
-      message.channel.send(new LexuroEmbed() .setDescription(`<:musicSettings:708136949487239198> | O volume foi definido para: ${args[0]}%`));
+      message.channel.send(new ParrotEmbed() .setDescription(`<:musicSettings:708136949487239198> | O volume foi definido para: ${args[0]}%`));
     }
   };
 }

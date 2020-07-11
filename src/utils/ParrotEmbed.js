@@ -1,7 +1,7 @@
 const { MessageEmbed } = require('discord.js');
 const { EMBED_COLOR } = require('./Constants');
 
-module.exports = class LexuroEmbed extends MessageEmbed {
+module.exports = class ParrotEmbed extends MessageEmbed {
   /**
    * @constructor
    * @param {user} user 

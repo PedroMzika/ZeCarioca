@@ -1,4 +1,4 @@
-const { Command, LexuroEmbed } = require('../../');
+const { Command, ParrotEmbed } = require('../../');
 
 module.exports = class StopCommand extends Command {
   constructor(client) {
@@ -16,6 +16,6 @@ module.exports = class StopCommand extends Command {
 
     player.destroy();
     this.client.music.leave(message.guild.id);
-    channel.send(new LexuroEmbed() .setDescription("<:musicEject:708136949365473340> | Saindo do canal de voz."))
+    channel.send(new ParrotEmbed() .setDescription("<:musicEject:708136949365473340> | Saindo do canal de voz."))
   };
 }

@@ -1,5 +1,5 @@
 const CommandUtils = require('./CommandUtils')
-const LexuroEmbed = require('../../utils/LexuroEmbed')
+const ParrotEmbed = require('../../utils/ParrotEmbed')
 
 module.exports = class Command {
   constructor(options = {}, client) {
@@ -29,7 +29,7 @@ module.exports = class Command {
   run() {}
 
   error({ channel }, error) {
-      const embed = new LexuroEmbed().setDescription(error.message).setColor('RED');
+      const embed = new ParrotEmbed().setDescription(error.message).setColor('RED');
 
       return channel.send(embed);
   }

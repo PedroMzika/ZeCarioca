@@ -1,4 +1,4 @@
-const { Command, LexuroEmbed } = require('../../');
+const { Command, ParrotEmbed } = require('../../');
 const { Utils } = require("erela.js");
 
 module.exports = class QueueCommand extends Command {
@@ -18,6 +18,6 @@ module.exports = class QueueCommand extends Command {
     let index = 0;
     const serverQueue = this.client.music.players.get(message.guild.id).queue;
 
-    message.channel.send(new LexuroEmbed() .setTitle(`Tocando agora: \`${player.queue[0].info.title}\``) .setDescription(`${serverQueue.map(a => `${++index}. ${a.info.title}`).join("\n")}`))
+    message.channel.send(new ParrotEmbed() .setTitle(`Tocando agora: \`${player.queue[0].info.title}\``) .setDescription(`${serverQueue.map(a => `${++index}. ${a.info.title}`).join("\n")}`))
   };
 }

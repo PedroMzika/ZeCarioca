@@ -1,5 +1,5 @@
 const Command = require('../../structures/command/Command');
-const { LexuroEmbed } = require('../../')
+const { ParrotEmbed } = require('../../')
 
 module.exports = class LoopCommand extends Command {
   	constructor(client) {
@@ -23,7 +23,7 @@ module.exports = class LoopCommand extends Command {
 
     	const { type, enabled } = player.looped ? ({ type: 0, enabled: false }) : ({ type: 1, enabled: true });
 
-    	channel.send(new LexuroEmbed() .setDescription(`<:musicRepeat:708136949285650463> | O loop foi ${enabled ? '`ligado`' : '`desligado`'}!`));
+    	channel.send(new ParrotEmbed() .setDescription(`<:musicRepeat:708136949285650463> | O loop foi ${enabled ? '`ligado`' : '`desligado`'}!`));
 
     	player.loop(type);
 

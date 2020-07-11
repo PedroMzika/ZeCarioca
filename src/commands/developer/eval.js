@@ -1,4 +1,4 @@
-const { Command, LexuroEmbed } = require('../../');
+const { Command, ParrotEmbed } = require('../../');
 const { inspect } = require('util');
 
 module.exports = class EvalCommand extends Command {
@@ -22,7 +22,7 @@ module.exports = class EvalCommand extends Command {
     
         	if (typeof output !== 'string')
         	output = require('util').inspect(output, { depth: 0 });
-        	const embed = new LexuroEmbed()
+        	const embed = new ParrotEmbed()
             	.setAuthor('Eval')
             	.addField('Input', `\`\`\`js\n${input}\n\`\`\``)
             	.addField('Output',  `\`\`\`js\n${output}\n\`\`\``)

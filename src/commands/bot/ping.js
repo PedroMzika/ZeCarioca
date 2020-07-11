@@ -1,4 +1,4 @@
-const { Command, LexuroEmbed } = require('../../');
+const { Command, ParrotEmbed } = require('../../');
 
 module.exports = class PingCommand extends Command {
   constructor(client) {
@@ -11,7 +11,7 @@ module.exports = class PingCommand extends Command {
   }
 
   async run({ message, author, client, channel }) {
-    channel.send(new LexuroEmbed(author)
+    channel.send(new ParrotEmbed(author)
       .setDescription(`Meu ping atualmente é: ${Math.round(client.ws.ping)}!`));
   };
 }

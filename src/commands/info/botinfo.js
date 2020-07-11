@@ -15,7 +15,7 @@ module.exports = class BotInfoCommand extends Command {
 
   run({ message, author, client, channel }) {
 
-    message.channel.send( new LexuroEmbed() .setDescription(dateNow));
+    message.channel.send("em breve 👍");
 
   };
 }

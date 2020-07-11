@@ -1,7 +1,7 @@
 const Command = require('../../structures/command/Command');
 const { LexuroEmbed } = require('../../')
 
-module.exports = class PlayCommand extends Command {
+module.exports = class ParrotCommand extends Command {
   	constructor(client) {
     	super(
       	{
@@ -30,14 +30,14 @@ module.exports = class PlayCommand extends Command {
     		
     	switch (loadType) {
     		case 'NO_MATCHES': {
-    			channel.send(new LexuroEmbed() .setDescription("⚠️ | Não achei nenhum resultado."))
+    			channel.send(new ParrotEmbed() .setDescription("⚠️ | Não achei nenhum resultado."))
     		}
 
     		case 'SEARCH_RESULT':
     		case 'TRACK_LOADED': {
     			player.addToQueue(tracks[0], message.author);
 
-      			channel.send(new LexuroEmbed()
+      			channel.send(new ParrotEmbed()
       			.setDescription(`Adicionado na fila: **${tracks[0].info.title}**!`))
 
       			if (!player.playing) return player.play();

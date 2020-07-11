@@ -1,4 +1,4 @@
-const { Command, LexuroEmbed } = require('../../');
+const { Command, ParrotEmbed } = require('../../');
 
 module.exports = class HelpCommand extends Command {
   constructor(client) {
@@ -13,7 +13,7 @@ module.exports = class HelpCommand extends Command {
   run({ message, author, client, channel }) {
     const filterCommands = (category) => (command) => command.category === category
 
-    const HelpEmbed = new LexuroEmbed(author)
+    const HelpEmbed = new ParrotEmbed(author)
       .setTitle(`Atualmente o bot contem: ${this.client.commands.size} comandos!`)
       .addField(`Comandos do Bot: ${this.client.commands.filter(filterCommands("Bot")).size}`, this.client.commands.filter(filterCommands("Bot")).map(c => `\`${c.name}\``).join(',\n'))
 			.addField(`Comandos de Desenvolvedores: ${this.client.commands.filter(filterCommands("Developer")).size}`, this.client.commands.filter(filterCommands("Developer")).map(c => `\`${c.name}\``).join(",\n"))

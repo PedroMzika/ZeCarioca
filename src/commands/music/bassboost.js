@@ -1,4 +1,4 @@
-const { Command, LexuroEmbed } = require('../../');
+const { Command, ParrotEmbed } = require('../../');
 
 module.exports = class BassBoostCommand extends Command {
   constructor(client) {
@@ -21,7 +21,7 @@ module.exports = class BassBoostCommand extends Command {
 
     const { type, enabled } = player.bassboost ? ({ type: 0, enabled: false }) : ({ type: 1, enabled: true });
 
-    channel.send(new LexuroEmbed() .setDescription(`<:musicSettings:708136949487239198> | O Bassboost foi definido como ${enabled ? '`ligado`' : '`desligado`'}!`));
+    channel.send(new ParrotEmbed() .setDescription(`<:musicSettings:708136949487239198> | O Bassboost foi definido como ${enabled ? '`ligado`' : '`desligado`'}!`));
 
     player.setEQ(Array(6).fill(0).map((n, i) => ({ band: i, gain: type })));
 

@@ -8,7 +8,7 @@ module.exports = {
   CommandUtils: CommandUtils,
 
   // Utils
-  LexuroEmbed: require('./utils/LexuroEmbed'),
+  ParrotEmbed: require('./utils/ParrotEmbed'),
   FileUtils: require('./utils/FileUtils'),
   Util: require('./utils/Util'),
   PermissionsUtils: require('./utils/PermissionsUtils'),

@@ -1,4 +1,4 @@
-const { Command, LexuroEmbed } = require('../../');
+const { Command, ParrotEmbed } = require('../../');
 
 module.exports = class AvatarCommand extends Command {
 	constructor(client) {
@@ -14,6 +14,6 @@ module.exports = class AvatarCommand extends Command {
 
     const avatarUrl = user.displayAvatarURL({ format: 'png', dynamic: true, size: 2048 });
 
-    return channel.send(new LexuroEmbed() .setDescription(`Aqui está o avatar de: ${user.username}`) .setImage(avatarUrl));
+    return channel.send(new ParrotEmbed() .setDescription(`Aqui está o avatar de: ${user.username}`) .setImage(avatarUrl));
   };
 }
