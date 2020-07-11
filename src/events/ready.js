@@ -1,5 +1,5 @@
 const { GorilinkManager } = require('gorilink')
-const { LexuroEmbed } = require('../');
+const { ParrotEmbed } = require('../');
 const { CariocaPlayer } = require("../structures/music")
 
 const nodes = [
@@ -26,7 +26,7 @@ module.exports = class Ready {
       console.log(`${node.tag || node.host} - Lavalink conectado com sucesso!`)
     })
     .on('trackStart', async (player, track) => {
-      player.textChannel.send(new LexuroEmbed().setDescription(`<:music:708136949189443645> | Tocando agora: **${track.info.title}**`))
+      player.textChannel.send(new ParrotEmbed().setDescription(`<:music:708136949189443645> | Tocando agora: **${track.info.title}**`))
     })
   }
 };
