@@ -1,7 +1,7 @@
 const { Client } = require('discord.js');
 const { EventLoader, CommandLoader } = require('./loaders')
 
-module.exports = class Lexuro extends Client {
+module.exports = class Parrot extends Client {
   /**
    * @constructor
    */

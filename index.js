@@ -3,7 +3,7 @@ const { config } = require('dotenv');
 config(); // Run dotenv configuration.
 
 const Parrot = require('./src/Parrot');
-const client = new Pereira()
+const client = new Parrot()
 
 client.initializeLoaders();
 
