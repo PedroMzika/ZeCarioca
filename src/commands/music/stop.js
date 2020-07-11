@@ -15,7 +15,6 @@ module.exports = class StopCommand extends Command {
     const player = this.client.music.players.get(message.guild.id);
 
     player.destroy();
-    this.client.music.leave(message.guild.id);
-    channel.send(new ParrotEmbed() .setDescription("<:musicEject:708136949365473340> | Saindo do canal de voz."))
+    channel.send(new ParrotEmbed() .setDescription("<:musicEject:708136949365473340> | Saindo do canal de voz."));
   };
 }
