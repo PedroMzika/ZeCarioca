@@ -1,4 +1,4 @@
-const { Command, LexuroEmbed } = require('../../');
+const { Command, ParrotEmbed } = require('../../');
 const moment = require("moment");
 moment.locale("pt-BR")
 const dateNow = moment().format('LTS');
@@ -15,7 +15,7 @@ module.exports = class BotInfoCommand extends Command {
 
   run({ message, author, client, channel }) {
 
-    message.channel.send("em breve 👍");
+    message.channel.send(new ParrotEmbed() .setDescription("Em breve mais informações 👍") .addField("Convite sem permissão:", "[Clique aqui](https://discord.com/api/oauth2/authorize?client_id=721849985343422505&permissions=0&scope=bot)") .addField("Convite com permissão:", "[Clique aqui](https://discord.com/api/oauth2/authorize?client_id=721849985343422505&permissions=8&scope=bot)"));
 
   };
 }
