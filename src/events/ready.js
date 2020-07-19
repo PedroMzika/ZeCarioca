@@ -24,10 +24,10 @@ module.exports = class Ready {
     	Player: CariocaPlayer
     })
     .on("queueEnd", player => {
-      player.textChannel.send("<:musicStop:708136949214609500> | A lista de reprodução acabou! Irei sair do canal em 2 minutos.");
+      player.textChannel.send(new ParrotEmbed() .setDescription("<:musicStop:708136949214609500> | A lista de reprodução acabou! Irei sair do canal em 2 minutos."));
       
       setTimeout(() => {
-        this.client.music.players.get(message.guild.id).destroy();
+      	player.destroy();
       }, 60000 * 2); 
       
     })
