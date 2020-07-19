@@ -1,13 +1,14 @@
 const { GorilinkManager } = require('gorilink')
 const { ParrotEmbed } = require('../');
 const { CariocaPlayer } = require("../structures/music")
+require("dotenv").config();
 
 const nodes = [
   { 
     tag: 'Node 1',
-    host: '13.84.216.222',
-    port: 2334,
-    password: "zecariocaLavaink",
+    host: process.env.LAVALINK_HOST,
+    port: process.env.LAVALINK_PORT,
+    password: process.env.LAVALINK_PASSWORD,
   }
 ]
 
