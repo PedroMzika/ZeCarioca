@@ -23,6 +23,14 @@ module.exports = class Ready {
     this.client.music = new GorilinkManager(this.client, nodes, {
     	Player: CariocaPlayer
     })
+    .on("queueEnd", player => {
+      player.textChannel.send("<:musicStop:708136949214609500> | A lista de reprodução acabou! Irei sair do canal em 2 minutos.");
+      
+      setTimeout(() => {
+        this.client.music.players.get(message.guild.id).destroy();
+      }, 60000 * 2); 
+      
+    })
     .on('nodeConnect', node => {
       console.log(`${node.tag || node.host} - Lavalink conectado com sucesso!`)
     })
