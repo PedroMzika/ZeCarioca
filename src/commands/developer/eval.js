@@ -3,14 +3,14 @@ const { inspect } = require('util');
 
 module.exports = class EvalCommand extends Command {
   	constructor(client) {
-      	super({
-          	name: 'eval',
-          	aliases: ['ex', 'execute', "e"],
-          	category: 'Developer',
-         	hidden: true,
-          	description: 'Teste comandos e códigos!',
-          	utils: { devOnly: true }
-      	}, client)
+      super({
+        name: 'eval',
+        aliases: ['ex', 'execute', "e"],
+        category: 'Developer',
+        hidden: true,
+        description: 'Teste comandos e códigos!',
+        utils: { devOnly: true }
+      }, client)
   	}
 
   	async run({ channel, message }, args) {
