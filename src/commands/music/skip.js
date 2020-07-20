@@ -16,13 +16,13 @@ module.exports = class SkipCommand extends Command {
     const player = this.client.music.players.get(message.guild.id);
 
     if(player) {
-      if (player.track.info.requester.id !== message.author.id || player.dj.id !== message.author.id) {
-        return channel.send(new ParrotEmbed() .setDescription("⚠️ | Você não é o DJ/requester deste(a) canal/música."));
-      } else {
+      if (author.id == player.track.info.requester.id || author.id == player.dj.id) {
         player.stop();
         message.channel.send(new ParrotEmbed() .setDescription("<:musicNext:708136949436645505> | A música foi pulada!")).then(msg => {
           msg.delete({ timeout: 30000 });
-        })
+        });
+      } else {
+        return channel.send(new ParrotEmbed() .setDescription("⚠️ | Você não é o DJ/requester deste(a) canal/música."));
       }
     } else {
       message.channel.send(new ParrotEmbed() .setDescription("⚠️ | Não há músicas tocando no momento!"));

@@ -21,12 +21,12 @@ module.exports = class LoopCommand extends Command {
 
 		if (typeof player.looped !== 'boolean') player.looped = false;
 
-    	const { type, enabled } = player.looped ? ({ type: 0, enabled: false }) : ({ type: 1, enabled: true });
+    const { type, enabled } = player.looped ? ({ type: 0, enabled: false }) : ({ type: 1, enabled: true });
 
-    	channel.send(new ParrotEmbed() .setDescription(`<:musicRepeat:708136949285650463> | O loop foi ${enabled ? '`ligado`' : '`desligado`'}!`));
+    channel.send(new ParrotEmbed() .setDescription(`<:musicRepeat:708136949285650463> | O loop foi ${enabled ? '`ligado`' : '`desligado`'}!`));
 
-    	player.loop(type);
+    player.loop(type);
 
-    	player.looped = enabled;
+    player.looped = enabled;
 	}
 }
