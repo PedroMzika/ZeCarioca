@@ -16,7 +16,7 @@ module.exports = class QueueCommand extends Command {
     const player = this.client.music.players.get(message.guild.id)
 
     if (player) {
-      if (isNaN(args[0])) return channel.send(new ParrotEmbed() .setDescription("⚠️ | Coloque um **número** da música que quer pular!");
+      if (isNaN(args[0])) return channel.send(new ParrotEmbed() .setDescription("⚠️ | Coloque um **número** da música que quer pular!"));
       if (!args[0]) return channel.send(new ParrotEmbed() .setDescription("⚠️ | Coloque o **número** da música que quer pular!"));
       if (args[0] > player.queue.length) return channel.send(new ParrotEmbed() .setDescription("⚠️ | Não há essa quantidade de música na playlist!"));
 
