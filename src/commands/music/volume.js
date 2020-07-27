@@ -12,7 +12,7 @@ module.exports = class VolumeCommand extends Command {
     }, client)
   }
 
-  async run({ message, author, client, channel }, args) {
+  async run({ message, author, client, channel, member }, args) {
     const player = this.client.music.players.get(message.guild.id);
     const volume = args[0];
     

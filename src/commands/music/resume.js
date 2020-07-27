@@ -11,7 +11,7 @@ module.exports = class ResumeCommand extends Command {
     }, client)
   }
 
-  async run({ message, author, client, channel }) {
+  async run({ message, author, client, channel, member }) {
     const player = this.client.music.players.get(message.guild.id);
 
     if (!player) return channel.send(new ParrotEmbed() .setDescription("⚠️ | Não há músicas tocando no momento!"));

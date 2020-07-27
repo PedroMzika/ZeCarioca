@@ -12,7 +12,7 @@ module.exports = class QueueCommand extends Command {
     }, client)
   }
 
-  async run({ message, author, client, channel }, args) {
+  async run({ message, author, client, channel, member }, args) {
     const player = this.client.music.players.get(message.guild.id)
 
     if (player.voiceChannel !== member.voice.channel.id) return channel.send(new ParrotEmbed() .setDescription("⚠️ | Você não está no mesmo canal que eu!"));

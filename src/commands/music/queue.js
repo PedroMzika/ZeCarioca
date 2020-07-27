@@ -12,7 +12,7 @@ module.exports = class QueueCommand extends Command {
     }, client)
   }
 
-  async run({ message, author, client, channel }) {
+  async run({ message, author, client, channel, member }) {
 
     const player = this.client.music.players.get(message.guild.id);
 
