@@ -14,9 +14,9 @@ module.exports = class BassBoostCommand extends Command {
   async run({ message, author, client, channel, member }) {
     const player = this.client.music.players.get(message.guild.id);
 
-    if (player.voiceChannel !== member.voice.channel.id) return channel.send(new ParrotEmbed() .setDescription("⚠️ | Você não está no mesmo canal que eu!"));
+    if (!player) return channel.send(new LexuroEmbed() .setDescription("⚠️ | Não há nenhum player tocando no momento."));
 
-    if (!player) return channel.send(new LexuroEmbed() .setDescription("⚠️ | Não há nenhum player tocando no momento."))
+    if (player.voiceChannel !== member.voice.channel.id) return channel.send(new ParrotEmbed() .setDescription("⚠️ | Você não está no mesmo canal que eu!"));
     
     if (typeof player.bassboost !== 'boolean') player.bassboost = false;
 
