@@ -14,6 +14,10 @@ module.exports = class ResumeCommand extends Command {
   async run({ message, author, client, channel }) {
     const player = this.client.music.players.get(message.guild.id);
 
+    if (!player) return channel.send(new ParrotEmbed() .setDescription("⚠️ | Não há músicas tocando no momento!"));
+
+    if (player.voiceChannel !== member.voice.channel.id) return channel.send(new ParrotEmbed() .setDescription("⚠️ | Você não está no mesmo canal que eu!"));
+
     if (player.paused) {
       message.channel.send(new ParrotEmbed() .setDescription("<:musicPlay:708136949755674654> | A música foi retomada."));
     	player.pause(false);

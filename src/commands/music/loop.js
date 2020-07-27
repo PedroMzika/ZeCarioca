@@ -7,7 +7,7 @@ module.exports = class LoopCommand extends Command {
       	{
         	name: 'loop',
         	aliases: ['repetir'],
-        	category: 'Musica',
+        	category: 'Música',
         	description: 'O player ira repetir a música atual.',
         	utils: { voiceChannel: true }
       	},
@@ -16,8 +16,12 @@ module.exports = class LoopCommand extends Command {
   	}
 
   	async run({ message, client, channel, member }, args) {
-      
+
     const player = this.client.music.players.get(message.guild.id);
+
+    if (!player) return channel.send(new ParrotEmbed() .setDescription("⚠️ | Não há músicas tocando no momento!"));
+
+    if (player.voiceChannel !== member.voice.channel.id) return channel.send(new ParrotEmbed() .setDescription("⚠️ | Você não está no mesmo canal que eu!"));
 
 		if (typeof player.looped !== 'boolean') player.looped = false;
 

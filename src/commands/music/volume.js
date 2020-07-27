@@ -6,7 +6,7 @@ module.exports = class VolumeCommand extends Command {
     super({
       name: 'volume',
       aliases: ['vol'],
-      category: 'Musica',
+      category: 'Música',
       description: 'Defina o volume das músicas e veja o volume atual.',
       utils: { voiceChannel: true }
     }, client)
@@ -15,6 +15,10 @@ module.exports = class VolumeCommand extends Command {
   async run({ message, author, client, channel }, args) {
     const player = this.client.music.players.get(message.guild.id);
     const volume = args[0];
+    
+    if (!player) return channel.send(new ParrotEmbed() .setDescription("⚠️ | Não há músicas tocando no momento!"));
+    
+    if (player.voiceChannel !== member.voice.channel.id) return channel.send(new ParrotEmbed() .setDescription("⚠️ | Você não está no mesmo canal que eu!"));
 
     if (!volume) {
       message.channel.send(new ParrotEmbed() .setDescription(`<:musicSettings:708136949487239198> | O volume atual está em: ${player.state.volume}%`))

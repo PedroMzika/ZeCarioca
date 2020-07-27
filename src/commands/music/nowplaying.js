@@ -6,7 +6,7 @@ module.exports = class NpCommand extends Command {
     super({
       name: 'nowplaying',
       aliases: ['np', 'tocando'],
-      category: 'Musica',
+      category: 'Música',
       description: 'Informa á música que está tocando.',
       utils: { voiceChannel: true }
     }, client)
@@ -14,6 +14,10 @@ module.exports = class NpCommand extends Command {
 
   async run({ message, author, client, channel }) {
     const player = this.client.music.players.get(message.guild.id);
+
+    if (!player) return channel.send(new ParrotEmbed() .setDescription("⚠️ | Não há músicas tocando no momento!"));
+
+    if (player.voiceChannel !== member.voice.channel.id) return channel.send(new ParrotEmbed() .setDescription("⚠️ | Você não está no mesmo canal que eu!"));
 
     const NpEmbed = new ParrotEmbed()
       .setAuthor("Tocando Agora!")

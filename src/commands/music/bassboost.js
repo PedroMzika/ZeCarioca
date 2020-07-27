@@ -5,15 +5,16 @@ module.exports = class BassBoostCommand extends Command {
     super({
       name: 'bassboost',
       aliases: ['bass', 'bb'],
-      category: 'Musica',
+      category: 'Música',
       description: 'Aumenta os graves da música.',
       utils: { voiceChannel: true }
     }, client)
   }
 
   async run({ message, author, client, channel, member }) {
-
     const player = this.client.music.players.get(message.guild.id);
+
+    if (player.voiceChannel !== member.voice.channel.id) return channel.send(new ParrotEmbed() .setDescription("⚠️ | Você não está no mesmo canal que eu!"));
 
     if (!player) return channel.send(new LexuroEmbed() .setDescription("⚠️ | Não há nenhum player tocando no momento."))
     
