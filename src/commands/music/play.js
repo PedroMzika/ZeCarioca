@@ -19,8 +19,6 @@ module.exports = class ParrotCommand extends Command {
   async run({ message, client, channel, member }, args) {
 
     const memberChannel = member.voice.channel.id;
-    
-    if (player.voiceChannel !== memberChannel) return channel.send(new ParrotEmbed() .setDescription("⚠️ | Você não está no mesmo canal que eu!"));
         
     const player = await this.client.music.join({
       guild: message.guild.id,
@@ -28,6 +26,8 @@ module.exports = class ParrotCommand extends Command {
       textChannel: message.channel,
       dj: message.author
     }, { selfDeaf: true });
+
+    if (player.voiceChannel !== memberChannel) return channel.send(new ParrotEmbed() .setDescription("⚠️ | Você não está no mesmo canal que eu!"));
 
     const { tracks, playlistInfo, loadType } = await this.client.music.fetchTracks(args.join(' '));
     		
