@@ -5,10 +5,11 @@ module.exports = class LoopCommand extends Command {
   	constructor(client) {
     	super(
       	{
-        	name: 'loop',
-        	aliases: ['repetir'],
-        	category: 'Música',
-        	description: 'O player ira repetir a música atual.',
+        	name: "loop",
+        	aliases: ["repetir"],
+        	category: "Música",
+        	description: "O player ira repetir a música atual.",
+          usage: "loop",
         	utils: { voiceChannel: true }
       	},
       	client

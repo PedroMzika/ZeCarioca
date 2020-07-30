@@ -4,10 +4,11 @@ const { Utils } = require("erela.js");
 module.exports = class NpCommand extends Command {
   constructor(client) {
     super({
-      name: 'nowplaying',
-      aliases: ['np', 'tocando'],
-      category: 'Música',
-      description: 'Informa á música que está tocando.',
+      name: "nowplaying",
+      aliases: ["np", "tocando"],
+      category: "Música",
+      description: "Informa á música que está tocando.",
+      usage: "nowplaying",
       utils: { voiceChannel: true }
     }, client)
   }

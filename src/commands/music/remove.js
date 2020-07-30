@@ -4,10 +4,11 @@ const { Utils } = require("erela.js");
 module.exports = class QueueCommand extends Command {
   constructor(client) {
     super({
-      name: 'removemusic',
-      aliases: ['rm', 'remove'],
-      category: 'Música',
-      description: 'Tira uma música da lista.',
+      name: "removemusic",
+      aliases: ["rm", "remove"],
+      category: "Música",
+      description: "Tira uma música da lista.",
+      usage: "remove <número inteiro>",
       utils: { voiceChannel: true }
     }, client)
   }

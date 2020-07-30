@@ -3,10 +3,11 @@ const { Command, ParrotEmbed } = require('../../');
 module.exports = class StopCommand extends Command {
   constructor(client) {
     super({
-      name: 'stop',
-      aliases: ['leave', 'quit'],
-      category: 'Música',
-      description: 'Para a música que está tocando.',
+      name: "stop",
+      aliases: ["leave", "quit"],
+      category: "Música",
+      description: "Para a música que está tocando.",
+      usage: "stop",
       utils: { voiceChannel: true }
     }, client)
   }

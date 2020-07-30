@@ -5,10 +5,10 @@ module.exports = class ParrotCommand extends Command {
   constructor(client) {
     super(
       {
-        name: 'play',
-        aliases: ['tocar', 'p'],
-        category: 'Música',
-        description: 'Reproduza a sua música favorita no Discord.',
+        name: "play",
+        aliases: ["tocar", "p"],
+        category: "Música",
+        description: "Reproduza a sua música favorita no Discord.",
         utils: { voiceChannel: true },
         usage: "play <música/link/identifier>"
       },

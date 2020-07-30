@@ -4,11 +4,13 @@ const { Utils } = require("erela.js");
 module.exports = class VolumeCommand extends Command {
   constructor(client) {
     super({
-      name: 'volume',
-      aliases: ['vol'],
-      category: 'Música',
-      description: 'Defina o volume das músicas e veja o volume atual.',
-      utils: { voiceChannel: true }
+      name: "volume",
+      aliases: ["vol"],
+      category: "Música",
+      description: "Defina o volume das músicas e veja o volume atual.",
+      usage: "volume [número até 250]",
+      utils: { voiceChannel: true },
+      
     }, client)
   }
 

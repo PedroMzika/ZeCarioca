@@ -3,10 +3,11 @@ const { Command, ParrotEmbed } = require('../../');
 module.exports = class PauseCommand extends Command {
   constructor(client) {
     super({
-      name: 'pause',
-      aliases: ['pausar'],
-      category: 'Música',
-      description: 'Pausa à música que está reproduzindo.',
+      name: "pause",
+      aliases: ["pausar"],
+      category: "Música",
+      description: "Pausa à música que está reproduzindo.",
+      usage: "pause",
       utils: { voiceChannel: true }
     }, client)
   }

@@ -4,11 +4,12 @@ const { inspect } = require('util');
 module.exports = class EvalCommand extends Command {
   	constructor(client) {
       super({
-        name: 'eval',
-        aliases: ['ex', 'execute', "e"],
-        category: 'Developer',
+        name: "eval",
+        aliases: ["ex", "execute", "e"],
+        category: "Developer",
         hidden: true,
-        description: 'Teste comandos e códigos!',
+        description: "Teste comandos e códigos!",
+        usage: "eval <código>",
         utils: { devOnly: true }
       }, client)
   	}
@@ -26,7 +27,7 @@ module.exports = class EvalCommand extends Command {
             	.setAuthor('Eval')
             	.addField('Input', `\`\`\`js\n${input}\n\`\`\``)
             	.addField('Output',  `\`\`\`js\n${output}\n\`\`\``)
-            	.setFooter(message.member, this.client.user.displayAvatarURL)
+            	.setFooter(message.author.tag, this.client.user.displayAvatarURL)
             	.setTimestamp();   
         	message.channel.send(embed)
     	} catch(e) {

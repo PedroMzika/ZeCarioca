@@ -3,9 +3,11 @@ const { Command, ParrotEmbed } = require('../../');
 module.exports = class AvatarCommand extends Command {
 	constructor(client) {
 		super({
-			name: 'avatar',
-			category: 'Info',
-			description: 'Mostra o avatar de um usuário ou seu próprio.'
+			name: "avatar",
+			aliases: ["av"],
+			category: "Info",
+			description: "Mostra o avatar de um usuário ou seu próprio.",
+			usage: "avatar [id/menção]"
 		}, client)
 	}
 

@@ -3,10 +3,10 @@ const { Command, ParrotEmbed } = require('../../');
 module.exports = class BassBoostCommand extends Command {
   constructor(client) {
     super({
-      name: 'bassboost',
-      aliases: ['bass', 'bb'],
-      category: 'Música',
-      description: 'Aumenta os graves da música.',
+      name: "bassboost",
+      aliases: ["bass", "bb"],
+      category: "Música",
+      description: "Aumenta os graves da música.",
       utils: { voiceChannel: true }
     }, client)
   }

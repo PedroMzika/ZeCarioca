@@ -9,7 +9,8 @@ module.exports = class BotInfoCommand extends Command {
       name: 'botinfo',
       aliases: ['infobot', "bi"],
       category: 'Info',
-      description: 'Mostra as informações do bot.'
+      description: 'Mostra as informações do bot.',
+      usage: "botinfo"
     }, client)
   }
 

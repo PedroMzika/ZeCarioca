@@ -4,10 +4,11 @@ const { Utils } = require("erela.js");
 module.exports = class SkipCommand extends Command {
   constructor(client) {
     super({
-      name: 'skip',
-      aliases: ['pular'],
-      category: 'Música',
-      description: 'Pula á musica atual para a seguinte.',
+      name: "skip",
+      aliases: ["pular"],
+      category: "Música",
+      description: "Pula á musica atual para a seguinte.",
+      usage: "skip",
       utils: { voiceChannel: true }
     }, client)
   }

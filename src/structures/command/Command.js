@@ -5,10 +5,10 @@ module.exports = class Command {
   constructor(options = {}, client) {
     this.client = client
 
-    this.name = options.name || console.log('a');
+    this.name = options.name || console.log("Sem nome do comando!");
 
     this.aliases = options.aliases || []
-    this.category = options.category || 'Util'
+    this.category = options.category || 'Uteis'
 
     this.description = options.description || ''
     this.usage = options.usage || ''
