@@ -1,3 +1,3 @@
 module.exports = {
-  CariocaPlayer: require('./Player.js')
-}
+	CariocaPlayer: require("./Player.js")
+};

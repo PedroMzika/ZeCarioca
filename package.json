@@ -19,6 +19,7 @@
     "ws": "^7.3.0"
   },
   "devDependencies": {
+    "eslint": "^7.5.0",
     "nodemon": "^2.0.4"
   },
   "scripts": {
