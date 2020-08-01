@@ -15,7 +15,7 @@ module.exports = class QueueCommand extends Command {
 	async run({ message, author, channel, member }, args) {
 		const player = this.client.music.players.get(message.guild.id);
 
-		if (!player) return channel.send(new ParrotEmbed(author) .setDescription("⚠️ | Não há músicas tocando no momento!"));
+		if (!player.queue.length <= 0) return channel.send(new ParrotEmbed(author) .setDescription("⚠️ | Não há músicas tocando no momento!"));
 
 		if (player.voiceChannel !== member.voice.channel.id) return channel.send(new ParrotEmbed(author) .setDescription("⚠️ | Você não está no mesmo canal que eu!"));
 		
