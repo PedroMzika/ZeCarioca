@@ -1,57 +1,56 @@
-const { Command, ParrotEmbed } = require("../../");
+const { Command, ParrotEmbed } = require('../../')
 
 module.exports = class ParrotCommand extends Command {
-	constructor(client) {
-		super(
-			{
-				name: "play",
-				aliases: ["tocar", "p"],
-				category: "Música",
-				description: "Reproduza a sua música favorita no Discord.",
-				utils: { voiceChannel: true },
-				usage: "play <música/link/identifier>"
-			},
-			client
-		);
-	}
+  constructor (client) {
+    super(
+      {
+        name: 'play',
+        aliases: ['tocar', 'p'],
+        category: 'Música',
+        description: 'Reproduza a sua música favorita no Discord.',
+        utils: { voiceChannel: true },
+        usage: 'play <música/link/identifier>'
+      },
+      client
+    )
+  }
 
-	async run({ message, channel, member, author }, args) {
+  async run ({ message, channel, member, author }, args) {
+    const memberChannel = member.voice.channel.id
 
-		const memberChannel = member.voice.channel.id;
-				
-		const player = await this.client.music.join({
-			guild: message.guild.id,
-			voiceChannel: memberChannel,
-			textChannel: message.channel,
-			dj: message.author
-		}, { selfDeaf: true });
+    const player = await this.client.music.join({
+      guild: message.guild.id,
+      voiceChannel: memberChannel,
+      textChannel: channel,
+      dj: author
+    }, { selfDeaf: true })
 
-		if (player.voiceChannel !== memberChannel) return channel.send(new ParrotEmbed(author) .setDescription("⚠️ | Você não está no mesmo canal que eu!"));
+    if (player.voiceChannel !== memberChannel) return channel.send(new ParrotEmbed(author).setDescription('⚠️ | Você não está no mesmo canal que eu!'))
 
-		const { tracks, playlistInfo, loadType } = await this.client.music.fetchTracks(args.join(" "));
-				
-		switch (loadType) {
-		case "NO_MATCHES": {
-			channel.send(new ParrotEmbed(author) .setDescription("⚠️ | Não achei nenhum resultado."));
-			break;
-		}
+    const { tracks, playlistInfo, loadType } = await this.client.music.fetchTracks(args.join(' '))
 
-		case "SEARCH_RESULT":
-		case "TRACK_LOADED": {
-			player.addToQueue(tracks[0], message.author);
-			channel.send(new ParrotEmbed(author) .setDescription(`Adicionado na fila: **${tracks[0].info.title}**!`));
-			if (!player.playing) return player.play();
-			break;
-		}
+    switch (loadType) {
+      case 'NO_MATCHES': {
+        channel.send(new ParrotEmbed(author).setDescription('⚠️ | Não achei nenhum resultado.'))
+        break
+      }
 
-		case "PLAYLIST_LOADED": {
-			for (const track of tracks) {
-				player.addToQueue(track, message.author);
-			}
-			channel.send(new ParrotEmbed(author) .setDescription("Adicionei `" + tracks.length + "` músicas da playlist `" + playlistInfo.name + "`."));
-			if (!player.playing) return player.play();
-			break;  
-		}
-		}
-	}
-};
+      case 'SEARCH_RESULT':
+      case 'TRACK_LOADED': {
+        player.addToQueue(tracks[0], message.author)
+        channel.send(new ParrotEmbed(author).setDescription(`Adicionado na fila: **${tracks[0].info.title}**!`))
+        if (!player.playing) return player.play()
+        break
+      }
+
+      case 'PLAYLIST_LOADED': {
+        for (const track of tracks) {
+          player.addToQueue(track, message.author)
+        }
+        channel.send(new ParrotEmbed(author).setDescription('Adicionei `' + tracks.length + '` músicas da playlist `' + playlistInfo.name + '`.'))
+        if (!player.playing) return player.play()
+        break
+      }
+    }
+  }
+}

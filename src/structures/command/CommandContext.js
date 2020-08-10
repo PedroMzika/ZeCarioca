@@ -1,17 +1,16 @@
 module.exports = class CommandContext {
+  constructor (options = {}) {
+    this.client = options.client
 
-	constructor (options = {}) {
-		this.client = options.client;
+    this.command = options.command
+    this.message = options.message
 
-		this.command = options.command;
-		this.message = options.message;
+    this.author = options.message.author
+    this.member = options.message.member
+    this.guild = options.message.guild
+    this.voiceChannel = options.message.member.voice.channel
 
-		this.author = options.message.author;
-		this.member = options.message.member;
-		this.guild = options.message.guild;
-		this.voiceChannel = options.message.member.voice.channel;
-
-		this.channel = options.message.channel;
-		this.content = options.message.content;
-	}
-};
+    this.channel = options.message.channel
+    this.content = options.message.content
+  }
+}

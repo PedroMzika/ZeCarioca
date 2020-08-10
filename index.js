@@ -1,10 +1,7 @@
-const { config } = require("dotenv");
+const Parrot = require('./src/Parrot')
+const client = new Parrot()
+require('dotenv').config()
 
-config(); // Run dotenv configuration.
-
-const Parrot = require("./src/Parrot");
-const client = new Parrot();
-
-client.initializeLoaders();
-
-client.login(process.env.DISCORD_TOKEN);
+client
+  .initializeLoaders()
+  .login(process.env.DISCORD_TOKEN)
