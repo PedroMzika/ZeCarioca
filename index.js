@@ -1,6 +1,7 @@
 const Parrot = require('./src/Parrot')
 const client = new Parrot()
-require('dotenv').config()
+
+require('moment-duration-format')
 
 client
   .initializeLoaders()

@@ -1,6 +1,6 @@
 const { Command, ParrotEmbed } = require('../../')
 
-module.exports = class ParrotCommand extends Command {
+module.exports = class PlayCommand extends Command {
   constructor (client) {
     super(
       {
@@ -38,7 +38,7 @@ module.exports = class ParrotCommand extends Command {
       case 'SEARCH_RESULT':
       case 'TRACK_LOADED': {
         player.addToQueue(tracks[0], message.author)
-        channel.send(new ParrotEmbed(author).setDescription(`Adicionado na fila: **${tracks[0].info.title}**!`))
+        channel.send(new ParrotEmbed(author).setDescription(`<:music:708136949189443645> | Adicionado na fila: **${tracks[0].info.title}**!`))
         if (!player.playing) return player.play()
         break
       }
@@ -47,7 +47,7 @@ module.exports = class ParrotCommand extends Command {
         for (const track of tracks) {
           player.addToQueue(track, message.author)
         }
-        channel.send(new ParrotEmbed(author).setDescription('Adicionei `' + tracks.length + '` músicas da playlist `' + playlistInfo.name + '`.'))
+        channel.send(new ParrotEmbed(author).setDescription('<:music:708136949189443645> | Adicionei `' + tracks.length + '` músicas da playlist `' + playlistInfo.name + '`.'))
         if (!player.playing) return player.play()
         break
       }

@@ -1,6 +1,6 @@
 const { Command, ParrotEmbed } = require('../../')
 
-module.exports = class AvatarCommand extends Command {
+module.exports = class DeleteCommand extends Command {
   constructor (client) {
     super({
       name: 'delete',

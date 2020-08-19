@@ -1,6 +1,6 @@
 const { Command, ParrotEmbed } = require('../../')
 
-module.exports = class QueueCommand extends Command {
+module.exports = class RemoveCommand extends Command {
   constructor (client) {
     super({
       name: 'removemusic',
