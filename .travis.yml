@@ -6,4 +6,4 @@ install:
   - yarn --frozen-lockfile
 
 script:
-  - yarn lint:fix
+  - yarn lint
