@@ -19,7 +19,7 @@ module.exports = class Ready {
       Player: CariocaPlayer
     })
       .on('queueEnd', async player => {
-        await player.textChannel.send(new ParrotEmbed().setDescription('<:musicStop:708136949214609500> | A lista de reprodução acabou! Saindo do canal.'))
+        await player.textChannel.send(new ParrotEmbed().setDescription('<:musicStop:708136949214609500> | A lista de reprodução acabou! Saindo do canal.')).then(msg => msg.delete({ timeout: 15000 }))
 
         player.destroy()
       })
@@ -27,7 +27,7 @@ module.exports = class Ready {
         console.log(`${node.tag || node.host} - Lavalink conectado com sucesso!`)
       })
       .on('trackStart', async (player, track) => {
-        player.textChannel.send(new ParrotEmbed().setDescription(`<:music:708136949189443645> | Tocando agora: **${track.info.title}**`))
+        player.textChannel.send(new ParrotEmbed().setDescription(`<:music:708136949189443645> | Tocando agora: **${track.info.title}**`)).then(msg => msg.delete({ timeout: 15000 }))
       })
   }
 }

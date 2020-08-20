@@ -1,4 +1,5 @@
 module.exports = {
   formatTime: require('./FormatTime'),
-  Playlist: require('./Playlist.js')
+  Playlist: require('./Playlist.js'),
+  songInfos: require('./SongInfos')
 }

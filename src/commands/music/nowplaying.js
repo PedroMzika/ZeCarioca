@@ -15,9 +15,9 @@ module.exports = class NpCommand extends Command {
   async run ({ message, author, channel, member }) {
     const player = this.client.music.players.get(message.guild.id)
 
-    if (!player || player.queue.length <= 0) return channel.send(new ParrotEmbed().setDescription('⚠️ | Não há músicas tocando no momento!'))
+    if (!player || player.queue.length <= 0) return channel.send(new ParrotEmbed().setDescription('⚠️ | Não há músicas tocando no momento!')).then(msg => msg.delete({ timeout: 15000 }))
 
-    if (player.voiceChannel !== member.voice.channel.id) return channel.send(new ParrotEmbed().setDescription('⚠️ | Você não está no mesmo canal que eu!'))
+    if (player.voiceChannel !== member.voice.channel.id) return channel.send(new ParrotEmbed().setDescription('⚠️ | Você não está no mesmo canal que eu!')).then(msg => msg.delete({ timeout: 15000 }))
 
     const NpEmbed = new ParrotEmbed(author)
       .setAuthor('Tocando Agora!')
@@ -26,6 +26,6 @@ module.exports = class NpCommand extends Command {
       .addField('Caso queira assistir:', `[clique aqui](${player.queue[0].info.uri})`, false)
       .addField('Duração:', formatTime(player.queue[0].info.length), true)
       .setThumbnail(`https://img.youtube.com/vi/${player.queue[0].info.identifier}/maxresdefault.jpg`)
-    message.channel.send(NpEmbed)
+    channel.send(NpEmbed).then(msg => msg.delete({ timeout: 15000 }))
   }
 }
