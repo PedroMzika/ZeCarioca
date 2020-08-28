@@ -19,15 +19,6 @@ module.exports = class SearchCommand extends Command {
   async run ({ message, channel, member, author }, args) {
     const memberChannel = member.voice.channel.id
 
-    const player = await this.client.music.join({
-      guild: message.guild.id,
-      voiceChannel: memberChannel,
-      textChannel: channel,
-      dj: author
-    }, { selfDeaf: true })
-
-    if (player.voiceChannel !== memberChannel) return channel.send(new ParrotEmbed(author).setDescription('⚠️ | Você não está no mesmo canal que eu!')).then(msg => msg.delete({ timeout: 15000 }))
-
     const { tracks } = await this.client.music.fetchTracks(args.join(' '))
 
     const embed = new ParrotEmbed(author)
@@ -38,19 +29,28 @@ module.exports = class SearchCommand extends Command {
 
     // eslint-disable-next-line no-unused-vars
     const collector = channel.createMessageCollector(member => member.author.id === message.author.id, { time: 30000, max: 1 })
-      .on('collect', message => {
+      .on('collect', async message => {
+        const player = await this.client.music.join({
+          guild: message.guild.id,
+          voiceChannel: memberChannel,
+          textChannel: channel,
+          dj: author
+        }, { selfDeaf: true })
+
         if (message.content === 'cancelar' && player.queue === 0) {
           player.destroy()
           msg.delete()
-          return channel.send(new ParrotEmbed(author).setDescription('<:musicEject:708136949365473340> | Pesquisa cancelada.')).then(msg => msg.delete({ timeout: 15000 }))
+          return channel.send(new ParrotEmbed(author).setDescription('<:musicEject:708136949365473340> | Pesquisa cancelada.')).then(msg => msg.delete({ timeout: 30000 }))
         } else if (message.content === 'cancelar') {
           msg.delete()
-          return channel.send(new ParrotEmbed(author).setDescription('<:musicEject:708136949365473340> | Pesquisa cancelada.')).then(msg => msg.delete({ timeout: 15000 }))
+          return channel.send(new ParrotEmbed(author).setDescription('<:musicEject:708136949365473340> | Pesquisa cancelada.')).then(msg => msg.delete({ timeout: 30000 }))
         }
 
-        if (isNaN(message.content)) return channel.send(new ParrotEmbed(author).setDescription('⚠️ | Você não forneceu um número!')).then(msg => msg.delete({ timeout: 15000 }))
+        if (isNaN(message.content)) return channel.send(new ParrotEmbed(author).setDescription('⚠️ | Você não forneceu um número!')).then(msg => msg.delete({ timeout: 30000 }))
 
         const selected = parseInt(message.content - 1)
+
+        if (selected > 10) return channel.send(new ParrotEmbed(author).setDescription('⚠️ | Forneça um número menor ou igual a 10.')).then(msg => msg.delete({ timeout: 30000 }))
 
         player.addToQueue(tracks[selected], message.author)
 

@@ -15,6 +15,7 @@ module.exports = class PlaylistCommand extends Command {
   }
 
   async run ({ message, author, channel, member }, args) {
+    if (message.author.id !== '368459250776932363') return
     const player = this.client.music.players.get(message.guild.id)
 
     const user = await User.findById(author.id) || await User.create({ _id: author.id })
