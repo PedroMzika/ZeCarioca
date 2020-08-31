@@ -15,9 +15,9 @@ module.exports = class NpCommand extends Command {
   async run ({ message, author, channel, member }) {
     const player = this.client.music.players.get(message.guild.id)
 
-    if (!player || player.queue.length <= 0) return channel.send(new ParrotEmbed().setDescription('⚠️ | Não há músicas tocando no momento!')).then(msg => msg.delete({ timeout: 30000 }))
+    if (!player || player.queue.length <= 0) return channel.sendTimeout(new ParrotEmbed().setDescription('⚠️ | Não há músicas tocando no momento!'))
 
-    if (player.voiceChannel !== member.voice.channel.id) return channel.send(new ParrotEmbed().setDescription('⚠️ | Você não está no mesmo canal que eu!')).then(msg => msg.delete({ timeout: 30000 }))
+    if (player.voiceChannel !== member.voice.channel.id) return channel.sendTimeout(new ParrotEmbed().setDescription('⚠️ | Você não está no mesmo canal que eu!'))
 
     const NpEmbed = new ParrotEmbed(author)
       .setAuthor('Tocando Agora!')
@@ -25,7 +25,8 @@ module.exports = class NpCommand extends Command {
       .addField('Autor:', player.queue[0].info.author, false)
       .addField('Caso queira assistir:', `[clique aqui](${player.queue[0].info.uri})`, false)
       .addField('Duração:', formatTime(player.queue[0].info.length), true)
+      .addField('Requisitado por:', `${player.queue[0].info.requester.username}#${player.queue[0].info.requester.discriminator}`)
       .setThumbnail(`https://img.youtube.com/vi/${player.queue[0].info.identifier}/maxresdefault.jpg`)
-    channel.send(NpEmbed).then(msg => msg.delete({ timeout: 15000 }))
+    channel.sendTimeout(NpEmbed)
   }
 }

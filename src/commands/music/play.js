@@ -26,7 +26,7 @@ module.exports = class PlayCommand extends Command {
       dj: author
     }, { selfDeaf: true })
 
-    if (player.voiceChannel !== memberChannel) return channel.send(new ParrotEmbed(author).setDescription('⚠️ | Você não está no mesmo canal que eu!')).then(msg => msg.delete({ timeout: 15000 }))
+    if (player.voiceChannel !== memberChannel) return channel.sendTimeout(new ParrotEmbed(author).setDescription('⚠️ | Você não está no mesmo canal que eu!'))
 
     loadTypes(player, channel, author, args.join(' '))
   }

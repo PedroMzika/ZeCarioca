@@ -6,16 +6,14 @@ module.exports = async (player, channel, author, args) => {
 
   switch (loadType) {
     case 'NO_MATCHES': {
-      channel.send(embed.setDescription('⚠️ | Não achei nenhum resultado.'))
-        .then(msg => msg.delete({ timeout: 15000 }))
+      channel.sendTimeout(embed.setDescription('⚠️ | Não achei nenhum resultado.'))
       break
     }
 
     case 'SEARCH_RESULT':
     case 'TRACK_LOADED': {
       player.addToQueue(tracks[0], author)
-      channel.send(embed.setDescription(`<:music:708136949189443645> | Adicionado na fila: **${tracks[0].info.title}**!`))
-        .then(msg => msg.delete({ timeout: 15000 }))
+      channel.sendTimeout(embed.setDescription(`<:music:708136949189443645> | Adicionado na fila: **${tracks[0].info.title}**!`))
 
       if (!player.playing) return player.play()
       break
@@ -24,8 +22,7 @@ module.exports = async (player, channel, author, args) => {
     case 'PLAYLIST_LOADED': {
       for (const track of tracks) player.addToQueue(track, author)
 
-      channel.send(embed.setDescription(`<:music:708136949189443645> | Adicionei \`${tracks.length}\` músicas da playlist \`${playlistInfo.name}\`.`))
-        .then(msg => msg.delete({ timeout: 15000 }))
+      channel.sendTimeout(embed.setDescription(`<:music:708136949189443645> | Adicionei \`${tracks.length}\` músicas da playlist \`${playlistInfo.name}\`.`))
       if (!player.playing) return player.play()
       break
     }
