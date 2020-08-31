@@ -2,7 +2,7 @@ const { Command, ParrotEmbed } = require('../../')
 const { songInfos } = require('../../utils/music')
 
 module.exports = class SearchCommand extends Command {
-  constructor (client) {
+  constructor(client) {
     super(
       {
         name: 'search',
@@ -16,7 +16,7 @@ module.exports = class SearchCommand extends Command {
     )
   }
 
-  async run ({ message, channel, member, author }, args) {
+  async run({ message, channel, member, author }, args) {
     const memberChannel = member.voice.channel.id
 
     const { tracks } = await this.client.music.fetchTracks(args.join(' '))
@@ -53,6 +53,8 @@ module.exports = class SearchCommand extends Command {
         if (selected > 10) return channel.send(new ParrotEmbed(author).setDescription('⚠️ | Forneça um número menor ou igual a 10.')).then(msg => msg.delete({ timeout: 30000 }))
 
         player.addToQueue(tracks[selected], message.author)
+
+        channel.send(new ParrotEmbed().setDescription(`<:music:708136949189443645> | Adicionado na playlist: **${tracks[selected].info.title}**`))
 
         msg.delete()
 
