@@ -52,7 +52,7 @@ module.exports = class SearchCommand extends Command {
       return channel.send(warnsEmbeds.setDescription('<:musicEject:708136949365473340> | Pesquisa cancelada.')).then(msg => msg.delete({ timeout: 30000 }))
     }
 
-    const selected = Math.max(Math.min(messageCollected.content, 9), -1)
+    const selected = Math.max(Math.min(messageCollected.content - 1, 9), 0)
 
     if (isNaN(messageCollected.content)) return channel.send(warnsEmbeds.setDescription('⚠️ | Você não forneceu um número!')).then(msg => msg.delete({ timeout: 30000 }))
 
