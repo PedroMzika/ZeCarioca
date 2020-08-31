@@ -6,7 +6,7 @@ module.exports = class SuggestionCommand extends Command {
       {
         name: 'suggestion',
         aliases: ['sugestão', 'sugestao'],
-        category: 'Bot',
+        category: 'Úteis',
         description: 'Envie uma sugestão para o bot.',
         usage: 'sugestão <sugestão>'
       }, client)
