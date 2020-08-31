@@ -21,7 +21,7 @@
     "nodemon": "^2.0.4"
   },
   "scripts": {
-    "start": "node -r dotenv/config .",
+    "start": "node .",
     "test": "nodemon -r dotenv/config .",
     "lint": "eslint ./ index.js",
     "lint:fix": "eslint ./ index.js --fix"
