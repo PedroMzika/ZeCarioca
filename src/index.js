@@ -9,4 +9,3 @@ module.exports = {
   Util: require('./utils/Util'),
   PermissionsUtils: require('./utils/PermissionsUtils')
 }
-
