@@ -12,11 +12,11 @@ module.exports = class CommandUtils {
     const options = this.parseOptions(opts)
 
     if (options.devOnly && !thisDeveloper(author.id)) {
-      throw new Error('🚫 Somente meus desenvolvedores podem usar o comando!')
+      throw new Error('🚫 | Somente meus desenvolvedores podem usar o comando!')
     }
 
     if (options.voiceChannel && !voiceChannel) {
-      throw new Error('🚫 Por favor, entre um canal de voz!')
+      throw new Error('🚫 | Por favor, entre um canal de voz!')
     }
   }
 }

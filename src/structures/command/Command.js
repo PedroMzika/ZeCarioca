@@ -5,7 +5,7 @@ module.exports = class Command {
   constructor (options = {}, client) {
     this.client = client
 
-    this.name = options.name || console.log('Sem nome do comando!')
+    this.name = options.name
 
     this.aliases = options.aliases || []
     this.category = options.category || 'Úteis'

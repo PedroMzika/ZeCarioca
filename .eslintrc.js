@@ -9,4 +9,3 @@ module.exports = {
     ecmaVersion: 11
   }
 }
-// eu salvei o arquivo e n vai, pqp

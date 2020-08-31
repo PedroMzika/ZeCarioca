@@ -8,26 +8,43 @@ module.exports = class LoopCommand extends Command {
         aliases: ['repetir'],
         category: 'Música',
         description: 'O player ira repetir a música atual.',
-        usage: 'loop',
+        usage: 'loop <single/all/off>',
         utils: { voiceChannel: true }
       }, client)
   }
 
-  async run ({ message, channel, member, author }) {
+  async run ({ message, channel, member, author }, [option]) {
     const player = this.client.music.players.get(message.guild.id)
 
-    if (player.queue.length <= 0 || !player) return channel.send(new ParrotEmbed(author).setDescription('⚠️ | Não há músicas tocando no momento!'))
+    const messageLoop = new ParrotEmbed(author)
 
-    if (player.voiceChannel !== member.voice.channel.id) return channel.send(new ParrotEmbed(author).setDescription('⚠️ | Você não está no mesmo canal que eu!'))
+    if (!player || player.queue.length <= 0) return channel.sendTimeout(messageLoop.setDescription('⚠️ | Não há músicas tocando no momento!'))
 
-    if (typeof player.looped !== 'boolean') player.looped = false
+    if (player.voiceChannel !== member.voice.channel.id) return channel.sendTimeout(messageLoop.setDescription('⚠️ | Você não está no mesmo canal que eu!'))
 
-    const { type, enabled } = player.looped ? ({ type: 0, enabled: false }) : ({ type: 1, enabled: true })
+    if (author.id !== player.track.info.requester.id || author.id !== player.dj.id) return channel.sendTimeout(messageLoop.setDescription('⚠️ | Você não é o DJ/requester deste(a) canal/música.'))
 
-    channel.send(new ParrotEmbed(author).setDescription(`<:musicRepeat:708136949285650463> | O loop foi ${enabled ? '`ligado`' : '`desligado`'}!`))
+    switch (option.toLowerCase()) {
+      case '1':
+      case 'single': {
+        player.loop(1)
+        channel.sendTimeout(messageLoop.setDescription('<:musicRepeat:708136949285650463> | O loop foi definido para a música atual!'))
+        break
+      }
 
-    player.loop(type)
+      case '2':
+      case 'all': {
+        player.loop(2)
+        channel.sendTimeout(messageLoop.setDescription('<:musicRepeat:708136949285650463> | O loop foi definido para a queue inteira!'))
+        break
+      }
 
-    player.looped = enabled
+      case '0':
+      case 'off': {
+        player.loop(0)
+        channel.sendTimeout(messageLoop.setDescription('<:musicRepeat:708136949285650463> | O loop foi desligado!'))
+        break
+      }
+    }
   }
 }

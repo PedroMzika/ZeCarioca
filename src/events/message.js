@@ -7,7 +7,7 @@ module.exports = class Message {
   }
 
   event (message) {
-    if (message.author.bot && !message.guild) return
+    if (message.author.bot) return
 
     const thisPrefix = findPrefix(this.client, message)
 

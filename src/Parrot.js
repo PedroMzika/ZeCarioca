@@ -1,6 +1,8 @@
 const { Client } = require('discord.js')
 const { EventLoader, CommandLoader } = require('./loaders')
 
+require('./structures/discord')
+
 module.exports = class Parrot extends Client {
   constructor () {
     super('client')

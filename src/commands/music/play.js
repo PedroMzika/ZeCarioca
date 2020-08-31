@@ -1,6 +1,7 @@
 const { Command, ParrotEmbed } = require('../../')
+const { loadTypes } = require('../../utils/music')
 
-module.exports = class ParrotCommand extends Command {
+module.exports = class PlayCommand extends Command {
   constructor (client) {
     super(
       {
@@ -25,32 +26,8 @@ module.exports = class ParrotCommand extends Command {
       dj: author
     }, { selfDeaf: true })
 
-    if (player.voiceChannel !== memberChannel) return channel.send(new ParrotEmbed(author).setDescription('⚠️ | Você não está no mesmo canal que eu!'))
+    if (player.voiceChannel !== memberChannel) return channel.sendTimeout(new ParrotEmbed(author).setDescription('⚠️ | Você não está no mesmo canal que eu!'))
 
-    const { tracks, playlistInfo, loadType } = await this.client.music.fetchTracks(args.join(' '))
-
-    switch (loadType) {
-      case 'NO_MATCHES': {
-        channel.send(new ParrotEmbed(author).setDescription('⚠️ | Não achei nenhum resultado.'))
-        break
-      }
-
-      case 'SEARCH_RESULT':
-      case 'TRACK_LOADED': {
-        player.addToQueue(tracks[0], message.author)
-        channel.send(new ParrotEmbed(author).setDescription(`Adicionado na fila: **${tracks[0].info.title}**!`))
-        if (!player.playing) return player.play()
-        break
-      }
-
-      case 'PLAYLIST_LOADED': {
-        for (const track of tracks) {
-          player.addToQueue(track, message.author)
-        }
-        channel.send(new ParrotEmbed(author).setDescription('Adicionei `' + tracks.length + '` músicas da playlist `' + playlistInfo.name + '`.'))
-        if (!player.playing) return player.play()
-        break
-      }
-    }
+    loadTypes(player, channel, author, args.join(' '))
   }
 }
