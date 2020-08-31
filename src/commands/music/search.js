@@ -19,7 +19,9 @@ module.exports = class SearchCommand extends Command {
   async run({ message, channel, member, author }, args) {
     const memberChannel = member.voice.channel.id
 
-    const { tracks } = await this.client.music.fetchTracks(args.join(' '))
+    const { tracks, loadType } = await this.client.music.fetchTracks(args.join(' '))
+
+    if (['LOAD_FAILED', 'NO_MATCHES'].includes(loadType)) return channel.send(new ParrotEmbed().setDescription('⚠️ | Não consegui achar nenhuma música.'))
 
     const embed = new ParrotEmbed(author)
       .setTitle(`Resultados de: \`${args.join(' ')}\``)
@@ -27,38 +29,43 @@ module.exports = class SearchCommand extends Command {
       .setFooter('Digite "cancelar" para cancelar a pesquisa')
     const msg = await channel.send(embed)
 
-    // eslint-disable-next-line no-unused-vars
-    const collector = channel.createMessageCollector(member => member.author.id === message.author.id, { time: 30000, max: 1 })
-      .on('collect', async message => {
-        const player = await this.client.music.join({
-          guild: message.guild.id,
-          voiceChannel: memberChannel,
-          textChannel: channel,
-          dj: author
-        }, { selfDeaf: true })
+    const warnsEmbeds = new ParrotEmbed(author)
 
-        if (message.content === 'cancelar' && player.queue === 0) {
-          player.destroy()
-          msg.delete()
-          return channel.send(new ParrotEmbed(author).setDescription('<:musicEject:708136949365473340> | Pesquisa cancelada.')).then(msg => msg.delete({ timeout: 30000 }))
-        } else if (message.content === 'cancelar') {
-          msg.delete()
-          return channel.send(new ParrotEmbed(author).setDescription('<:musicEject:708136949365473340> | Pesquisa cancelada.')).then(msg => msg.delete({ timeout: 30000 }))
-        }
+    const filter = member => member.author.id === message.author.id
+    const messages = await channel.awaitMessages(filter, { time: 30000, max: 1 })
+    const messageCollected = messages.first()
 
-        if (isNaN(message.content)) return channel.send(new ParrotEmbed(author).setDescription('⚠️ | Você não forneceu um número!')).then(msg => msg.delete({ timeout: 30000 }))
+    if (!messageCollected) return channel.send(warnsEmbeds.setDescription('⚠️ | Você não forneceu nenhum número, cancelando.')).then(msg => msg.delete({ timeout: 30000 }))
 
-        const selected = parseInt(message.content - 1)
+    const player = await this.client.music.join({
+      guild: message.guild.id,
+      voiceChannel: memberChannel,
+      textChannel: channel,
+      dj: author
+    }, { selfDeaf: true })
 
-        if (selected > 10) return channel.send(new ParrotEmbed(author).setDescription('⚠️ | Forneça um número menor ou igual a 10.')).then(msg => msg.delete({ timeout: 30000 }))
+    if (messageCollected.content === 'cancelar') {
+      if (!player) player.destroy()
+      msg.delete()
+      return channel.send(warnsEmbeds.setDescription('<:musicEject:708136949365473340> | Pesquisa cancelada.')).then(msg => msg.delete({ timeout: 30000 }))
+    }
 
-        player.addToQueue(tracks[selected], message.author)
+    if (isNaN(messageCollected.content)) return channel.send(warnsEmbeds.setDescription('⚠️ | Você não forneceu um número!')).then(msg => msg.delete({ timeout: 30000 }))
 
+    const selected = Math.max(Math.min(messageCollected.content, 9), 0)
+
+<<<<<<< HEAD
         channel.send(new ParrotEmbed().setDescription(`<:music:708136949189443645> | Adicionado na playlist: **${tracks[selected].info.title}**`))
 
         msg.delete()
+=======
+    player.addToQueue(tracks[selected], message.author)
+    
+    channel.send(new ParrotEmbed() .setDescription(`<:music:708136949189443645> | Adicionado na playlist: **${tracks[selected].info.title}**.`))
+    
+    msg.delete()
+>>>>>>> 58e73e657d6213f7e66797b30ca3fe99ab0f510b
 
-        if (!player.playing) return player.play()
-      })
+    if (!player.playing) return player.play()
   }
 }

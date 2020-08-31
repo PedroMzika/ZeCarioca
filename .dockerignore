@@ -1,6 +1,7 @@
 .github/
 .vscode/
 .git/
+<<<<<<< HEAD
 node_modules/
 
 .editorconfig
@@ -9,3 +10,19 @@ node_modules/
 .gitinore
 *Dockerfile*
 LICENSE
+=======
+.deploy/
+node_modules/
+test/
+
+.editorconfig
+*.env*
+*.eslintrc*
+.gitignore
+.gitmodules
+.travis.yml
+*Dockerfile*
+*docker-compose*
+LICENSE
+nodemon.json
+>>>>>>> 58e73e657d6213f7e66797b30ca3fe99ab0f510b

@@ -19,7 +19,7 @@ module.exports = class EvalCommand extends Command {
 
     try {
       const input = args.join(' ')
-      let output = eval(input)
+      let output = await eval(input)
 
       if (typeof output !== 'string') { output = require('util').inspect(output, { depth: 0 }) }
       const embed = new ParrotEmbed(author)

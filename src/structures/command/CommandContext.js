@@ -5,12 +5,12 @@ module.exports = class CommandContext {
     this.command = options.command
     this.message = options.message
 
-    this.author = options.message.author
-    this.member = options.message.member
-    this.guild = options.message.guild
-    this.voiceChannel = options.message.member.voice.channel
+    this.author = this.message.author
+    this.member = this.message.member
+    this.guild = this.message.guild
+    this.voiceChannel = this.message.member.voice.channel
 
-    this.channel = options.message.channel
-    this.content = options.message.content
+    this.channel = this.message.channel
+    this.content = this.message.content
   }
 }
