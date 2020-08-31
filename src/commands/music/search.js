@@ -55,7 +55,9 @@ module.exports = class SearchCommand extends Command {
     const selected = Math.max(Math.min(messageCollected.content, 9), 0)
 
     player.addToQueue(tracks[selected], message.author)
-
+    
+    channel.send(new ParrotEmbed() .setDescription(`<:music:708136949189443645> | Adicionado na playlist: **${tracks[selected].info.title}**.`))
+    
     msg.delete()
 
     if (!player.playing) return player.play()
