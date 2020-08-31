@@ -22,6 +22,6 @@ module.exports = class QueueCommand extends Command {
     let index = 0
     const serverQueue = this.client.music.players.get(message.guild.id).queue
 
-    message.channel.send(new ParrotEmbed(author).setTitle(`Tocando agora: \`${player.queue[0].info.title}\``).setDescription(`${serverQueue.map(a => `\`${++index}.\` **${a.info.title}**`).join('\n')}`)).then(msg => msg.delete({ timeout: 30000 }))
+    message.channel.send(new ParrotEmbed(author).setTitle(`Tocando agora: \`${player.queue[0].info.title}\``).setDescription(`${serverQueue.map(a => `\`${++index}.\` **${a.info.title}** - *${a.info.requester.username}#${a.info.requester.discriminator}*`).join('\n')}`)).then(msg => msg.delete({ timeout: 30000 }))
   }
 }
