@@ -27,5 +27,7 @@ module.exports = class PauseCommand extends Command {
     } else {
       message.channel.sendTimeout(pauseEmbed.setDescription('⚠️ | Á música já está pausada.'))
     }
+
+    message.channel.reactMessage(player.textChannel.lastMessageID)
   }
 }

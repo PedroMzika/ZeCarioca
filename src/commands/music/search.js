@@ -63,5 +63,7 @@ module.exports = class SearchCommand extends Command {
     msg.delete()
 
     if (!player.playing) return player.play()
+
+    message.channel.reactMessage(player.textChannel.lastMessageID)
   }
 }

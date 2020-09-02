@@ -26,5 +26,7 @@ module.exports = class ResumeCommand extends Command {
     message.channel.sendTimeout(resumeQueue.setDescription('<:musicPlay:708136949755674654> | A música foi retomada.'))
 
     player.pause(false)
+
+    message.channel.reactMessage(player.textChannel.lastMessageID)
   }
 }

@@ -27,4 +27,6 @@ module.exports = async (player, channel, author, args) => {
       break
     }
   }
+
+  return false
 }

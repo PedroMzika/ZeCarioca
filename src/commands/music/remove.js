@@ -23,16 +23,20 @@ module.exports = class RemoveCommand extends Command {
 
     if (author.id !== player.track.info.requester.id || author.id !== player.dj.id) return channel.sendTimeout(removeQueue.setDescription('⚠️ | Você não é o DJ/requester deste(a) canal/música.'))
 
-    if (isNaN(args[0])) return channel.sendTimeout(removeQueue.setDescription('⚠️ | Coloque um **número** da música que quer pular!'))
+    const selected = parseInt(args[0]) - 1
 
     if (!args[0]) return channel.sendTimeout(removeQueue.setDescription('⚠️ | Coloque o **número** da música que quer pular!'))
 
-    if (args[0] > player.queue.length) return channel.sendTimeout(removeQueue.setDescription('⚠️ | Não há essa quantidade de música na playlist!'))
+    if (isNaN(selected)) return channel.sendTimeout(removeQueue.setDescription('⚠️ | Coloque um **número** da música que quer pular!'))
 
-    if (args[0] === 0) player.stop()
+    if (selected > player.queue.length) return channel.sendTimeout(removeQueue.setDescription('⚠️ | Não há essa quantidade de música na playlist!'))
 
-    player.queue.remove(args[0])
+    if (selected === 0) player.stop()
 
-    channel.sendTimeout(removeQueue.setDescription('<:musicFast:708136949143175239> | Música removida com sucesso!'))
+    channel.sendTimeout(removeQueue.setDescription(`<:musicFast:708136949143175239> | Música \`${player.queue[selected].info.title}\` removida com sucesso!`))
+
+    player.queue.remove(selected)
+
+    message.channel.reactMessage(player.textChannel.lastMessageID)
   }
 }

@@ -29,5 +29,7 @@ module.exports = class PlayCommand extends Command {
     if (player.voiceChannel !== memberChannel) return channel.sendTimeout(new ParrotEmbed(author).setDescription('⚠️ | Você não está no mesmo canal que eu!'))
 
     loadTypes(player, channel, author, args.join(' '))
+
+    message.channel.reactMessage(player.textChannel.lastMessageID)
   }
 }

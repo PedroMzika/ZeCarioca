@@ -25,5 +25,6 @@ module.exports = class QueueCommand extends Command {
     const serverQueue = this.client.music.players.get(message.guild.id).queue
 
     message.channel.sendTimeout(queueEmbed.setTitle(`Tocando agora: \`${player.queue[0].info.title}\``).setDescription(`${serverQueue.map(a => `\`${++index}.\` **${a.info.title}** - *${a.info.requester.username}#${a.info.requester.discriminator}*`).join('\n')}`))
+    message.channel.reactMessage(player.textChannel.lastMessageID)
   }
 }

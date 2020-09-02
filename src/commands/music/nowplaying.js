@@ -28,5 +28,7 @@ module.exports = class NpCommand extends Command {
       .addField('Requisitado por:', `${player.queue[0].info.requester.username}#${player.queue[0].info.requester.discriminator}`)
       .setThumbnail(`https://img.youtube.com/vi/${player.queue[0].info.identifier}/maxresdefault.jpg`)
     channel.sendTimeout(NpEmbed)
+
+    message.channel.reactMessage(player.textChannel.lastMessageID)
   }
 }

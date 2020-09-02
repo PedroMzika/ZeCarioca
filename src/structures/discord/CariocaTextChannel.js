@@ -10,6 +10,10 @@ Structures.extend('TextChannel', TextChannel => {
     sendTimeout (content, timeout = 30000) {
       return this.send(content).then(msg => msg.delete({ timeout }))
     }
+
+    reactMessage (messageId, emoji = '👍') {
+      this.messages.cache.get(messageId).react(emoji)
+    }
   }
 
   return CariocaTextChannel
